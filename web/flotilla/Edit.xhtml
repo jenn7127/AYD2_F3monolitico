@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FlotillaEditDlg" widgetVar="FlotillaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFlotillaTitle}">
+            <h:form id="FlotillaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{flotillaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFlotillaLabel_codflotilla}" for="codflotilla" />
+                        <p:inputText id="codflotilla" value="#{flotillaController.selected.codflotilla}" title="#{bundle.EditFlotillaTitle_codflotilla}" required="true" requiredMessage="#{bundle.EditFlotillaRequiredMessage_codflotilla}"/>
+                        <p:outputLabel value="#{bundle.EditFlotillaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{flotillaController.selected.nombre}" title="#{bundle.EditFlotillaTitle_nombre}" required="true" requiredMessage="#{bundle.EditFlotillaRequiredMessage_nombre}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{flotillaController.update}" value="#{bundle.Save}" update="display,:FlotillaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FlotillaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FlotillaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
